@@ -5,6 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './fundamentals';
 
+//examples - use this after each lecture
+// import './examples/observable';
+// import './examples/actions';
+// import './examples/reactions';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
