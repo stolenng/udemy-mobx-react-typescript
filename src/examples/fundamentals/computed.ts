@@ -13,9 +13,9 @@ class Person {
     @observable
     age: number = 15;
     @observable
-    isAlive: boolean = true;
+    dollars: number = 50;
     @observable
-    dollars: number = 5;
+    isAlive: boolean = true;
 
     constructor(props: IPerson) {
         Object.assign(this, props);
@@ -36,21 +36,21 @@ class Person {
         this.age = age;
     }
 
+    @computed
+    get euros() {
+        console.log('Calculation Euros!');
+        return this.dollars * 0.837720897;
+    }
+
     @action
     updateFullName(name: string, lastName: string) {
         this.firstName = name;
         this.lastName = lastName;
     }
 
-    @computed
-    get euors() {
-        console.log(`Calculating Euros!`);
-        return this.dollars * 2;
-    }
-
     @action
-    withdrawl() {
-        this.dollars -= 1;
+    withdraw() {
+        this.dollars -= 10;
     }
 }
 
@@ -59,13 +59,23 @@ const ourPerson = new Person({
     lastName: 'React'
 });
 
-autorun(() => {
-    console.log(`${ourPerson.euors}`);
+console.log('Before Observing - Not Cached', ourPerson.euros);
+console.log('Before Observing - Not Cached', ourPerson.euros);
+
+const dispose = autorun(() => {
+    console.log(`Current Money - ${ourPerson.euros}`);
 });
 
-ourPerson.withdrawl();
-ourPerson.withdrawl();
-ourPerson.withdrawl();
+console.log('After Observing - Cached', ourPerson.euros);
+console.log('After Observing - Cached', ourPerson.euros);
+console.log('After Observing - Cached', ourPerson.euros);
+console.log('After Observing - Cached', ourPerson.euros);
+
+// computed value update right after state change(observable update) !
+ourPerson.withdraw();
+
+dispose();
+
 
 
 

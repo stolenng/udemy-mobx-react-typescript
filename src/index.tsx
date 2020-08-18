@@ -9,6 +9,7 @@ import './fundamentals';
 // import './examples/observable';
 // import './examples/actions';
 // import './examples/reactions';
+// import './examples/computed';
 
 ReactDOM.render(
   <React.StrictMode>
