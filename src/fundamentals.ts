@@ -1,27 +1,44 @@
-import {action, autorun, observable, runInAction} from "mobx";
+import {action, autorun, observable, reaction, when} from "mobx";
 
 interface IPerson {
     firstName: string;
     lastName: string;
 }
 
-const waitForPromise = async () => new Promise(resolve => setTimeout(resolve, 1000));
-
 class Person {
     @observable
     firstName: string = 'Mobx';
     @observable
     lastName: string = 'React';
+    @observable
+    age: number = 15;
+    @observable
+    isAlive: boolean = true;
 
     constructor(props: IPerson) {
         Object.assign(this, props);
+
+        when(
+            () => this.age > 99,
+            () => this.bury()
+        )
     }
 
-    // @action
-    // updateFullName(name: string, lastName: string) {
-    //     this.firstName = name;
-    //     this.lastName = lastName;
-    // }
+    @action
+    bury() {
+        this.isAlive = false;
+    }
+
+    @action
+    setAge(age: number) {
+        this.age = age;
+    }
+
+    @action
+    updateFullName(name: string, lastName: string) {
+        this.firstName = name;
+        this.lastName = lastName;
+    }
 }
 
 const ourPerson = new Person({
@@ -29,19 +46,19 @@ const ourPerson = new Person({
     lastName: 'React'
 });
 
-// for logging for now.
 autorun(() => {
-    console.log(`${ourPerson.firstName} ${ourPerson.lastName}`);
+    console.log(`${ourPerson.firstName} ${ourPerson.lastName} ${ourPerson.age} - ${ourPerson.isAlive}`);
 });
 
-const updater = action(async () => {
-    ourPerson.lastName = 'new Name';
-    await waitForPromise();
+reaction(
+    () => !ourPerson.isAlive,
+    () => console.log('RIP')
+)
 
-    ourPerson.firstName = 'new last name'
-});
+// ourPerson.updateFullName('Georgy', 'Glezer');
 
-updater();
+ourPerson.setAge(120);
+
 
 
 
