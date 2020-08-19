@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './fundamentals';
-
+// import './fundamentals';
 //examples - use this after each lecture
 // import './examples/observable';
 // import './examples/actions';
 // import './examples/reactions';
 // import './examples/computed';
+
+
+// exercise -1
+// import './exercises/ex-1/exercise-1';
 
 ReactDOM.render(
   <React.StrictMode>
