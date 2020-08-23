@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './fundamentals';
+// import RootStore from "./examples/principals and concepts/how to structure our stores/stores/root-store";
 
-//examples - use this after each lecture
+// current working file
+// import './fundamentals';
+
+// examples - use this after each lecture
 // import './examples/observable';
 // import './examples/actions';
 // import './examples/reactions';
 // import './examples/computed';
+
+// const rootStore = new RootStore();
+// console.log(rootStore);
 
 
 // exercise -1
