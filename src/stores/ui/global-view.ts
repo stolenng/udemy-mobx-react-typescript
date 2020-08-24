@@ -17,9 +17,6 @@ export default class GlobalView {
 
     @computed
     get stats() {
-        return `
-         Current Users - ${this.rootStore.dataStores.usersStore.collection.map(user => user.name)},
-         Total Number Of Todos: ${this.rootStore.dataStores.todoStore.todoList.length}\
-         `;
+        return `Current Users - ${this.rootStore.dataStores.usersStore.collection.map(user => user.name)}\nTotal Number Of Todos: ${this.rootStore.dataStores.todoStore.todoList.length}`;
     }
 }

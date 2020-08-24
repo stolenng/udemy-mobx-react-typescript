@@ -23,8 +23,8 @@ export default class UsersStore {
         )
     }
 
-    getUser(name: string) {
-        return this.collection.find(user => user.name === name);
+    getUser(name: string): User {
+        return this.collection.find(user => user.name === name) as User;
     }
 
     @action
