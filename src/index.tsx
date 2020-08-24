@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 
 // current working file
 import './fundamentals';
+import RootStore from "./stores/root-store";
+import User from "./stores/data/users/user";
 
 // examples - use this after each lecture
 // import './examples/observable';
@@ -20,6 +22,24 @@ import './fundamentals';
 
 // exercise -1
 // import './exercises/ex-1.txt/exercise-1';
+
+const rootStore = new RootStore();
+
+rootStore.dataStores.usersStore.addUser('Georgy');
+rootStore.dataStores.usersStore.addUser('Hen');
+rootStore.dataStores.usersStore.addUser('Roni');
+rootStore.dataStores.usersStore.addUser('Daniil');
+
+const newUser = rootStore.dataStores.usersStore.getUser('Georgy');
+
+// @ts-ignore
+rootStore.dataStores.todoStore.addTodo('Finish The Exercise', newUser.id);
+// @ts-ignore
+rootStore.dataStores.todoStore.addTodo('OMG', newUser.id);
+
+rootStore.dataStores.usersStore.removeUser('Georgy');
+
+console.log(rootStore);
 
 ReactDOM.render(
   <React.StrictMode>

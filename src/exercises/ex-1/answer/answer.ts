@@ -10,7 +10,7 @@ class Todo {
     @observable
     isCompleted: boolean = false;
 
-    private disposer: () => void;
+    private readonly disposer: () => void;
 
     constructor(name: string) {
         this.name = name;
