@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 // import RootStore from "./examples/principals and concepts/how to structure our stores/stores/root-store";
 
 // current working file
-// import './fundamentals';
+import './fundamentals';
 
 // examples - use this after each lecture
 // import './examples/observable';

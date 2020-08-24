@@ -18,12 +18,12 @@ const demoSchool = {
 };
 
 
+// no control over the object
 const badPractice = observable(demoSchool);
 
 console.log(badPractice, 'All Became Observables');
 
-// Good Practice
-
+// Good Practice - We have control on each part of the object and we can easily modify/enhance and do how ever we like in them
 class Student {
     id: number;
     @observable
