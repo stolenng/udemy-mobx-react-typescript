@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// 
+import 'mobx-react-lite/batchingForReactDom';
+
 // current working file
 import './fundamentals';
 
