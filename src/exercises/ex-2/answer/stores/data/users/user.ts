@@ -1,11 +1,10 @@
-import RootStore from "../../root-store";
 import {computed, observable} from "mobx";
-import Todo from "../todos/todo";
+import RootStore from "../../root-store";
 
 let runningId = 0;
 
 export default class User {
-    id = runningId++;
+    id: number;
 
     @observable
     name: string;
@@ -13,12 +12,15 @@ export default class User {
     private rootStore: RootStore;
 
     constructor(name: string, rootStore: RootStore) {
+        this.id = runningId++;
         this.name = name;
         this.rootStore = rootStore;
+
+        rootStore.dataStores.todoStore.addTodo('Finish The Course!', this.id);
     }
 
     @computed
-    get todos(): Todo[] {
-        return this.rootStore.dataStores.todoStore.byUser(this.id);
+    get todos() {
+        return this.rootStore.dataStores.todoStore.getUserTodos(this.id);
     }
 }

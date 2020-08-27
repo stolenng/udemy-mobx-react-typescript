@@ -1,48 +1,35 @@
-import {action, observable, reaction} from "mobx";
+import {action, observable} from "mobx";
 import RootStore from "../../root-store";
 import User from "./user";
 
 export default class UsersStore {
     @observable
-    collection: User[] = [];
+    users: User[] = [];
 
     private rootStore: RootStore;
 
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
-
-        reaction(
-            () => this.collection.length,
-            () => {
-                const lastUser = this.collection[this.collection.length-1];
-
-                if (lastUser.todos.length === 0) {
-                    this.rootStore.dataStores.todoStore.addTodo('Finish The Course', lastUser.id);
-                }
-            }
-        )
-    }
-
-    getUser(name: string): User {
-        return this.collection.find(user => user.name === name) as User;
     }
 
     @action
     addUser(name: string) {
-        this.collection.push(new User(name, this.rootStore));
+        this.users.push(new User(name, this.rootStore));
+    }
+
+    getUser(name: string) {
+        return this.users.find(user => user.name == name) as User;
     }
 
     @action
     removeUser(name: string) {
-        const userToRemove = this.collection.find(user => user.name === name);
+        const userToRemove = this.getUser(name);
 
         if (userToRemove) {
-            const todosToRemvoe = userToRemove.todos.map(todo => todo.name);
-            const indexToRemove = this.collection.indexOf(userToRemove);
+            userToRemove.todos.forEach(todo => this.rootStore.dataStores.todoStore.removeTodo(todo.name));
+            const userToRemoveIndex = this.users.indexOf(userToRemove);
 
-            todosToRemvoe.forEach(todoName => this.rootStore.dataStores.todoStore.removeTodo(todoName));
-
-            this.collection.splice(indexToRemove, 1);
+            this.users.splice(userToRemoveIndex, 1);
         }
     }
 }
