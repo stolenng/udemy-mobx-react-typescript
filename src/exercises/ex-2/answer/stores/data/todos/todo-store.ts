@@ -48,11 +48,11 @@ export default class TodoStore {
 
     @computed
     get completedTodos() {
-        return this.todoList.filter(todo => todo.isCompleted).length;
+        return this.todoList.filter(todo => todo.isCompleted);
     }
 
     @computed
     get incompleteTodos() {
-        return this.todoList.filter(todo => !todo.isCompleted).length;
+        return this.todoList.filter(todo => !todo.isCompleted);
     }
 }
