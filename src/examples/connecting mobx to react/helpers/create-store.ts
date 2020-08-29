@@ -1,9 +1,5 @@
-import RootStore from "../../../exercises/ex-2/answer/stores/root-store";
+import RootStore from "../../../stores/root-store";
 
-const createStore = () => {
-    return {
-        rootStore: new RootStore()
-    };
+export const createStore = () => {
+  return new RootStore();
 };
-
-export {createStore};
