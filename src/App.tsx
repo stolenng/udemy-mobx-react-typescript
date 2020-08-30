@@ -1,14 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {TodoList} from "./examples/connecting mobx to react/components/TodoList";
+import {observer} from "mobx-react-lite";
+import {useStores} from "./stores/helpers/use-stores";
+import {Views} from "./stores/ui/global-view";
+import {TodoList} from "./components/TodoList";
 
 function App() {
-  return (
-    <div className="App">
-      <TodoList />
-    </div>
-  );
+    const {uiStores: {globalView}} = useStores();
+
+    const getView = () => {
+      if (globalView.currentView === Views.Todos) {
+          return <TodoList />;
+      }
+
+      if (globalView.currentView === Views.Users) {
+          return <div>Users</div>;
+      }
+    };
+
+    return (
+        <div className="App">
+            <div className="navbar">
+                <button onClick={() => globalView.setView(Views.Todos)}>Todos</button>
+                <button onClick={() => globalView.setView(Views.Users)}>Users</button>
+            </div>
+            {getView()}
+        </div>
+    );
 }
 
-export default App;
+export default observer(App);
