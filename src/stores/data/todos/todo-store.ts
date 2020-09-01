@@ -6,10 +6,7 @@ export default class TodoStore {
     @observable
     todoList: Todo[] = [];
 
-    rootStore: RootStore;
-
-    constructor(rootStore: RootStore) {
-        this.rootStore = rootStore;
+    constructor() {
 
         // reaction(
         //     () => this.todoList.length,

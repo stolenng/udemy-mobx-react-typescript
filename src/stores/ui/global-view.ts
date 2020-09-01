@@ -1,5 +1,6 @@
 import {action, autorun, computed, observable} from "mobx";
 import RootStore from "../root-store";
+import {getRoot} from "mobx-easy";
 
 export enum Views {
     Todos,
@@ -7,13 +8,11 @@ export enum Views {
 }
 
 export default class GlobalView {
-    private rootStore: RootStore;
 
     @observable
     currentView: Views = Views.Todos;
 
-    constructor(rootStore: RootStore) {
-        this.rootStore = rootStore
+    constructor() {
 
         autorun(() => {
            console.log(this.stats);
@@ -27,9 +26,11 @@ export default class GlobalView {
 
     @computed
     get stats() {
+        const rootStore = getRoot<RootStore>();
+
         return `
-            User Names: ${this.rootStore.dataStores.usersStore.users.map(user => user.name)},
-            Total Todos: ${this.rootStore.dataStores.todoStore.todoList.length}
+            User Names: ${rootStore.dataStores.usersStore.users.map(user => user.name)},
+            Total Todos: ${rootStore.dataStores.todoStore.todoList.length}
         `;
     }
 }

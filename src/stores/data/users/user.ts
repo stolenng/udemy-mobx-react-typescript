@@ -1,5 +1,6 @@
 import {computed, observable} from "mobx";
 import RootStore from "../../root-store";
+import {getRoot} from "mobx-easy";
 
 let runningId = 0;
 
@@ -9,19 +10,19 @@ export default class User {
     @observable
     name: string;
 
-    private rootStore: RootStore;
-
-    constructor(name: string, rootStore: RootStore) {
+    constructor(name: string) {
         this.id = runningId++;
         this.name = name;
-        this.rootStore = rootStore;
 
+        const rootStore = getRoot<RootStore>();
         rootStore.dataStores.todoStore.addTodo('Finish The Course!', this.id);
     }
 
     @computed
     get todos() {
-        return this.rootStore.dataStores.todoStore.getUserTodos(this.id);
+        const rootStore = getRoot<RootStore>();
+
+        return rootStore.dataStores.todoStore.getUserTodos(this.id);
     }
 
     @computed
