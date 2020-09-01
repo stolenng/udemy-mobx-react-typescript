@@ -5,7 +5,7 @@ export default class RootStore {
     dataStores: DataStore;
     uiStores: UiStore;
 
-    constructor() {
+    init() {
         this.dataStores = new DataStore(this);
         this.uiStores = new UiStore(this);
     }

@@ -7,24 +7,13 @@ import 'mobx-react-lite/batchingForReactDom';
 import {createStore} from "./stores/helpers/create-store";
 import {StoreProvider} from "./stores/helpers/store-context";
 
-// examples - use this after each lecture
+// examples - you can use this after each lecture
 // import './examples/observable';
 // import './examples/actions';
 // import './examples/reactions';
 // import './examples/computed';
 
-// const rootStore = new RootStore();
-// console.log(rootStore);
-
-
-// exercise -1
-// import './exercises/ex-1/answer/answer.ts';
-
-// exercise -2
-// import './exercises/ex-2/answer/index.tsx';
-
-
-const rootStore = createStore();
+const {rootStore} = createStore();
 
 // create 4 users
 rootStore.dataStores.usersStore.addUser('Georgy');
