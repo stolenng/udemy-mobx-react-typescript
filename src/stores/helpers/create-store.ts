@@ -1,12 +1,21 @@
 import RootStore from "../root-store";
 import {wrapRoot} from "mobx-easy";
+import TodoService from "../../todo-service";
+
+export interface RootEnv {
+  todoService: TodoService;
+  isDev: boolean;
+}
 
 export const createStore = () => {
-  const env = {};
+  const env = {
+    todoService: new TodoService(),
+    isDev: process.env.NODE_ENV === 'development'
+  };
 
   const rootStore = wrapRoot({
     RootStore: RootStore,
-    env: env // will add this in the next lecture
+    env: env
   })
 
   return {

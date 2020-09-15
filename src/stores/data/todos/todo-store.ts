@@ -1,6 +1,8 @@
 import {action, computed, observable, reaction, when} from "mobx";
 import RootStore from "../../root-store";
 import Todo from "./todo";
+import {getEnv} from "mobx-easy";
+import {RootEnv} from "../../helpers/create-store";
 
 export default class TodoStore {
     @observable
@@ -19,8 +21,17 @@ export default class TodoStore {
         // );
     }
 
-    @action
-    addTodo(name: string, userId: number) {
+    async addTodo(name: string, userId: number) {
+        const {todoService, isDev} = getEnv<RootEnv>();
+
+        if (!isDev) {
+            await todoService.addTodo()
+        }
+
+        this._addTodo(name, userId);
+    }
+
+    private _addTodo(name: string, userId: number) {
         this.todoList.push(new Todo(name, userId, this));
     }
 

@@ -15,7 +15,7 @@ export default class GlobalView {
     constructor() {
 
         autorun(() => {
-           console.log(this.stats);
+           // console.log(this.stats);
         });
     }
 
