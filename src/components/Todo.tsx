@@ -6,36 +6,40 @@ interface Props {
     todo: Todo;
 }
 
-export const TodoComponent: FunctionComponent<Props> = observer(({todo}) => {
-    const [text, setText] = useState('');
+const TodoComponent: FunctionComponent<Props> = observer(({todo}) => {
     const [isEditing, setEditing] = useState(false);
+    const [text, setText] = useState('');
 
-    const updateTodo = () => {
+    const saveTodo = () => {
+        if (text.length <= 2) {
+            alert('name is too short');
+            return;
+        }
         todo.updateName(text);
         setEditing(false);
         setText('');
     }
 
-    return (
-        <li className='list-group-item'>
-            {
-                isEditing ?
-                    <input value={text} type="text" onChange={e => setText(e.target.value)}/>
-                    :
-                    <span>{`Name: ${todo.name} - UserId: ${todo.userId}`}</span>
-            }
-            {
-                isEditing ?
-                    <button onClick={updateTodo} className="btn btn-danger">Save</button>
-                    :
-                    <button onClick={() => setEditing(true)} className="btn btn-info float-right">Edit</button>
+    const todoName = isEditing ? <input type="text" value={text} onChange={e => setText(e.target.value)}/> :
+        <span>Name: {todo.name}, UserId: {todo.userId}</span>;
 
-            }
-            {
-                isEditing ? null : <button className="btn float-right btn-danger" onClick={() => todo.remove()}>Delete</button>
-            }
-            {isEditing ? null :             <button onClick={() => todo.toggleTodo()} className="btn btn-primary float-right">Toggle</button>
-            }
+    const editButton = isEditing ?
+        <button className="btn btn-primary float-right" onClick={saveTodo}>Save</button> :
+        <button onClick={() => setEditing(true)} className="btn btn-info float-right">Edit</button>;
+
+    const toggleTodo = isEditing ? null :
+        <button className="btn btn-primary float-right" onClick={() => todo.toggleTodo()}>Toggle Todo</button>;
+
+    const removeTodo = isEditing ? null :
+        <button className="float-right btn btn-danger" onClick={() => todo.remove()}> Remove</button>;
+    return (
+        <li className="list-group-item">
+            {todoName}
+            {editButton}
+            {toggleTodo}
+            {removeTodo}
         </li>
     )
 });
+
+export default TodoComponent;

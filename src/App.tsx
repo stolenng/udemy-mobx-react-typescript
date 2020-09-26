@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import {useStores} from "./stores/helpers/use-stores";
 import {Views} from "./stores/ui/global-view";
+import TodoList from "./components/TodoList";
 import {observer} from "mobx-react-lite";
-import {TodoList} from "./components/TodoList";
 
 function App() {
     const {uiStores: {globalView}} = useStores();
