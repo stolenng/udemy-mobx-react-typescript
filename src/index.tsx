@@ -4,26 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'mobx-react-lite/batchingForReactDom';
-import {createStore} from "./examples/connecting mobx to react/helpers/create-store";
-import {StoreProvider} from "./examples/connecting mobx to react/helpers/store-context";
-import RootStore from "./exercises/ex-2/answer/stores/root-store";
-
-// examples - use this after each lecture
-// import './examples/observable';
-// import './examples/actions';
-// import './examples/reactions';
-// import './examples/computed';
-
-// const rootStore = new RootStore();
-// console.log(rootStore);
-
-
-// exercise -1
-// import './exercises/ex-1/answer/answer.ts';
-
-// exercise -2
-// import './exercises/ex-2/answer/index.tsx';
-
+import {createStore} from "./stores/helpers/create-store";
+import {StoreProvider} from "./stores/helpers/store-context";
 
 const rootStore = createStore();
 
