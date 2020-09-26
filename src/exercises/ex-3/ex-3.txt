@@ -1,0 +1,13 @@
+We should have 2 views in our application
+We should be able to move between the 2 views
+
+First one is a list of todos
+    We should be able to see the todos separated into 2 lists:
+        Complete and Incomplete
+    We should have ability to: add, remove, edit
+    We should see todo name and user id
+
+Second views is a list of users and their todo
+    We should be able to add/remove users
+    We should be able to select current user and see only his todos
+    We should be able to:  add, remove, edit his todos
