@@ -31,13 +31,13 @@ export default class TodoStore {
         return this.todoList.filter(todo => todo.userId === userId);
     }
 
-    getTodo(name: string) {
-        return this.todoList.find(todo => todo.name === name);
+    getTodo(id: number) {
+        return this.todoList.find(todo => todo.id === id);
     }
 
     @action
-    removeTodo(name: string) {
-        const todoToRemove = this.getTodo(name);
+    removeTodo(id: number) {
+        const todoToRemove = this.getTodo(id);
 
         if (todoToRemove) {
             todoToRemove.dispose();

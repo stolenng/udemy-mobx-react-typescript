@@ -1,9 +1,14 @@
-import React, {useState} from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import {useStores} from "../stores/helpers/use-stores";
 import TodoComponent from "./Todo";
 import {observer} from "mobx-react-lite";
+import User from "../stores/data/users/user";
 
-const TodoList = () => {
+interface Props {
+    user?: User;
+}
+
+const TodoList: FunctionComponent<Props> = ({user}) => {
     const {dataStores: {todoStore}} = useStores();
     const [text, setText] = useState('');
 
@@ -13,9 +18,12 @@ const TodoList = () => {
             return;
         }
 
-        todoStore.addTodo(text, 999);
+        todoStore.addTodo(text, user ? user.id : 999);
         setText('');
     }
+
+    const completedTodos = user ? user.completedTodos : todoStore.completedTodos;
+    const incompleteTodos = user ? user.incompleteTodos : todoStore.incompleteTodos;
 
     return (
         <div>
@@ -29,18 +37,18 @@ const TodoList = () => {
             </div>
             <div className="card">
                 <div className="card-header">
-                    Incomplete Todos({todoStore.incompleteTodos.length}):
+                    Incomplete Todos({incompleteTodos.length}):
                 </div>
                 <ul className="list-group">
-                    {todoStore.incompleteTodos.map(todo => <TodoComponent key={todo.id} todo={todo} />)}
+                    {incompleteTodos.map(todo => <TodoComponent key={todo.id} todo={todo} />)}
                 </ul>
             </div>
             <div className="card">
                 <div className="card-header">
-                    Complete Todos({todoStore.completedTodos.length}):
+                    Complete Todos({completedTodos.length}):
                 </div>
                 <ul className="list-group">
-                    {todoStore.completedTodos.map(todo => <TodoComponent key={todo.id} todo={todo} />)}
+                    {completedTodos.map(todo => <TodoComponent key={todo.id} todo={todo} />)}
                 </ul>
             </div>
         </div>

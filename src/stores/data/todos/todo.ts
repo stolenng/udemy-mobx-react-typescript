@@ -29,7 +29,7 @@ export default class Todo {
     }
 
     remove() {
-        this.todoStore.removeTodo(this.name);
+        this.todoStore.removeTodo(this.id);
     }
 
     @action
