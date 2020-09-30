@@ -1,16 +1,14 @@
 import {action, computed, observable, reaction, when} from "mobx";
 import RootStore from "../../root-store";
 import Todo from "./todo";
+import {getEnv} from "mobx-easy";
+import {RootEnv} from "../../helpers/create-store";
 
 export default class TodoStore {
     @observable
     todoList: Todo[] = [];
 
-    rootStore: RootStore;
-
-    constructor(rootStore: RootStore) {
-        this.rootStore = rootStore;
-
+    constructor() {
         // reaction(
         //     () => this.todoList.length,
         //     () => console.log(`Current Todo Count: ${this.todoList.length}, Done Todos: ${this.completedTodos}, Incomplete Todos: ${this.incompleteTodos}`)
@@ -22,8 +20,16 @@ export default class TodoStore {
         // );
     }
 
+    async addTodo(name: string, userId: number) {
+        const {todoService} = getEnv<RootEnv>();
+
+        await todoService.addTodo();
+
+        this._addTodo(name, userId);
+    }
+
     @action
-    addTodo(name: string, userId: number) {
+    private _addTodo(name: string, userId: number) {
         this.todoList.push(new Todo(name, userId, this));
     }
 
@@ -35,8 +41,16 @@ export default class TodoStore {
         return this.todoList.find(todo => todo.id === id);
     }
 
+    async removeTodo(id: number) {
+        const {todoService} = getEnv<RootEnv>();
+
+        await todoService.removeTodo();
+
+        this._removeTodo(id);
+    }
+
     @action
-    removeTodo(id: number) {
+    private _removeTodo(id: number) {
         const todoToRemove = this.getTodo(id);
 
         if (todoToRemove) {
