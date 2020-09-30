@@ -1,5 +1,5 @@
  // Remeber To Install mobx@6(version 6) if u want to use it
- import { makeAutoObservable, observable, action, computed, autorun } from "mobx";
+ // import { makeAutoObservable, observable, action, computed, autorun } from "mobx";
 
  // class Person {
  //     id: number = 1;

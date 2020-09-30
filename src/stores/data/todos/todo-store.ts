@@ -1,5 +1,4 @@
-import {action, computed, observable, reaction, when} from "mobx";
-import RootStore from "../../root-store";
+import {action, computed, observable} from "mobx";
 import Todo from "./todo";
 import {getEnv} from "mobx-easy";
 import {RootEnv} from "../../helpers/create-store";

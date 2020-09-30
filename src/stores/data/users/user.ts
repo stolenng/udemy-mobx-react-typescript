@@ -34,14 +34,4 @@ export default class User {
     get incompleteTodos() {
         return this.todos.filter(todo => !todo.isCompleted);
     }
-
-    @computed
-    get completedTodos() {
-        return this.todos.filter(todo => todo.isCompleted);
-    }
-
-    @computed
-    get incompleteTodos() {
-        return this.todos.filter(todo => !todo.isCompleted);
-    }
 }
