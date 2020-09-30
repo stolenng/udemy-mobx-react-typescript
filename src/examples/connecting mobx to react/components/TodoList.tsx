@@ -1,6 +1,6 @@
 import React from 'react';
 import {useObserver} from "mobx-react-lite";
-import {useStores} from "../helpers/use-stores";
+import {useStores} from "../../../stores/helpers/use-stores";
 import {TodoComponent} from "./Todo";
 
 export const TodoList = () => {

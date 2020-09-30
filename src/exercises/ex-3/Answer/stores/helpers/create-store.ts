@@ -1,4 +1,4 @@
-import RootStore from "../../../stores/root-store";
+import RootStore from "../root-store";
 
 export const createStore = () => {
   return new RootStore();

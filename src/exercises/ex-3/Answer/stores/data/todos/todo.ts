@@ -1,19 +1,13 @@
 import {action, observable, reaction} from "mobx";
 import TodoStore from "./todo-store";
-import {setter} from "mobx-easy";
 
 let runningId = 0;
 
-interface Todo {
-    updateName: (name: string) => void;
-}
-
-class Todo {
+export default class Todo {
     id: number;
 
     userId: number;
 
-    @setter('updateName')
     @observable
     name: string;
     @observable
@@ -43,9 +37,12 @@ class Todo {
         this.isCompleted = !this.isCompleted;
     }
 
+    @action
+    updateName(name: string) {
+        this.name = name;
+    }
+
     dispose() {
         this.disposer();
     }
 }
-
-export default Todo;
